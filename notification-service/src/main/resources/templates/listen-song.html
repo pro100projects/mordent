@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Listen Song</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+        <h3>
+            Hello, <span th:text="${user.name() + ' ' + user.surname()}">Peter Parker</span>!
+        </h3>
+        <p>
+            You have new auditions for a song "<span th:text="${song.name()}">"song name"</span>", you have <span th:text="${song.playback()}">100</span> listens.
+        </p>
+        <p>
+            Regards, <br/>
+            <em>The Mordent Team</em>
+        </p>
+    </body>
+</html>

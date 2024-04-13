@@ -1,0 +1,30 @@
+spring:
+  flyway:
+    user: postgres
+    password: postgres
+    url: jdbc:postgresql://database:5432/mordent?serverTimezone=UTC
+  datasource:
+    username: postgres
+    password: postgres
+    url: r2dbc:postgresql://database:5432/mordent?serverTimezone=UTC
+  r2dbc:
+    username: postgres
+    password: postgres
+    url: r2dbc:postgresql://database:5432/mordent?serverTimezone=UTC
+  data:
+    mongodb:
+      host: mongo
+      port: 27017
+      username: root
+      password: root
+  kafka:
+    bootstrap-servers: broker:9092
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+
+services:
+  auth:
+    url: http://auth-service:8080

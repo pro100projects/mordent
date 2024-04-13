@@ -1,0 +1,19 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: metadata-service
+  r2dbc:
+    name: mordent
+  data:
+    mongodb:
+      database: mordent
+      authentication-database: admin
+  kafka:
+    consumer:
+      topics:
+        save-song: mordent-save-song-event
+        delete-song: mordent-delete-song-event
+
+logging.pattern.level: "%5p [${spring.application.name:} %X{traceId:-} %X{spanId:-}]"

@@ -1,0 +1,75 @@
+stages:
+  - danger
+  - release
+  - publish-docker
+  - cleanup
+
+danger-review:
+  only:
+    - merge_requests
+  image: node:latest
+  stage: danger
+  cache: []
+  needs: []
+  script:
+    - npm install danger
+    - npx danger ci --dangerfile Dangerfile.js --failOnErrors
+
+release:
+  image: node:latest
+  stage: release
+  except:
+    - schedules
+  only:
+    refs:
+      - main
+  script:
+    - npm install -g semantic-release @semantic-release/gitlab @semantic-release/changelog @semantic-release/git @semantic-release/exec
+    - npx semantic-release
+
+publish-docker:
+  image: docker:latest
+  stage: publish-docker
+  only:
+    - tags
+    - merge_requests
+  tags:
+    - codeclimate
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - if [[ "$CI_OPEN_MERGE_REQUESTS" == "" ]]; then export IMAGE_TAG="${TAG:-latest}"; else export IMAGE_TAG="${TAG:-manual}"; fi
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$IMAGE_TAG;
+    - docker image push $CI_REGISTRY_IMAGE:$IMAGE_TAG
+  when: on_success
+
+publish-docker-manual:
+  image: docker:latest
+  stage: publish-docker
+  tags:
+    - codeclimate
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - if [[ "$CI_OPEN_MERGE_REQUESTS" == "" ]]; then export IMAGE_TAG="${TAG:-latest}"; else export IMAGE_TAG="${TAG:-manual}"; fi
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$IMAGE_TAG;
+    - docker image push $CI_REGISTRY_IMAGE:$IMAGE_TAG
+  when: manual
+
+cleanup:
+  image: docker:stable
+  stage: cleanup
+  only:
+    - tags
+  before_script:
+    - apk add --no-cache bash curl jq
+    - chmod +x ./gitlab-job-artifact-cleanup.sh
+  script: ./gitlab-job-artifact-cleanup.sh

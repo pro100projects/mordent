@@ -1,0 +1,9 @@
+spring:
+  mail:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+  kafka:
+    bootstrap-servers: http://kafka.default.svc.cluster.local:9092
+
+application:
+  host: ${APPLICATION_HOST}

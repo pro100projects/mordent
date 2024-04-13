@@ -1,0 +1,1 @@
+UPDATE users SET username='bogdan.tkachuk@gmail.com', password='password', updated_at=NOW(), provider='GOOGLE_NOT_ACTIVATE', enabled=false, uuid=null, token='token' WHERE id=2;

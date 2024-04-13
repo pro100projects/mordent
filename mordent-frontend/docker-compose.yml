@@ -1,0 +1,19 @@
+version: '3.8'
+name: 'mordent'
+
+services:
+  frontend:
+    build: .
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    networks:
+      - mordent-network
+
+#if "network mordent-network declared as external, but could not be found"
+#start script "docker network create mordent-network"
+networks:
+  mordent-network:
+    external: true
+    driver: bridge
+    name: mordent-network

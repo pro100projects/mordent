@@ -1,0 +1,35 @@
+spring:
+  flyway:
+    user: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://postgres.default.svc.cluster.local:5432/mordent
+  datasource:
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://postgres.default.svc.cluster.local:5432/mordent
+  kafka:
+    bootstrap-servers: http://kafka.default.svc.cluster.local:9092
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin.default.svc.cluster.local:9411/api/v2/spans
+
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+  oauth2:
+    authorized-request-host: ${OAUTH2_AUTHORIZED_REQUEST_HOST}
+    authorized-request-hosts:
+      - ${OAUTH2_AUTHORIZED_REQUEST_HOST}
+    authorized-redirect-uris:
+      - ${OAUTH2_AUTHORIZED_REDIRECT_URI}
+  activate:
+    redirect-uri: ${ACTIVATE_REDIRECT_URI}

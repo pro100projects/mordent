@@ -1,0 +1,22 @@
+spring:
+  flyway:
+    user: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/mordent?serverTimezone=UTC
+  datasource:
+    username: postgres
+    password: postgres
+    url: r2dbc:postgresql://localhost:5432/mordent?serverTimezone=UTC
+  r2dbc:
+    password: postgres
+    username: postgres
+    url: r2dbc:postgresql://localhost:5432/mordent?serverTimezone=UTC
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: root
+      password: root
+services:
+  auth:
+    url: http://localhost:8080

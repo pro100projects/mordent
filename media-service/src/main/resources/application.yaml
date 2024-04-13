@@ -1,0 +1,45 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: media-service
+  flyway:
+    enabled: true
+    driver-class-name: org.postgresql.Driver
+    baseline-version: 2
+    baseline-on-migrate: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  r2dbc:
+    name: mordent
+  data:
+    mongodb:
+      database: mordent
+      authentication-database: admin
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      topics:
+        save-song: mordent-save-song-event
+        listen-song: mordent-listen-song-event
+        delete-song: mordent-delete-song-event
+
+management:
+  info:
+    git:
+      mode: full
+  health:
+    diskspace:
+      enabled: false
+    ping:
+      enabled: false
+  endpoint:
+    health:
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info

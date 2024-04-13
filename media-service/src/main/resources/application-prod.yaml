@@ -1,0 +1,30 @@
+spring:
+  flyway:
+    user: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://postgres.default.svc.cluster.local:5432/mordent?serverTimezone=UTC
+  datasource:
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    url: r2dbc:postgresql://postgres.default.svc.cluster.local:5432/mordent?serverTimezone=UTC
+  r2dbc:
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    url: r2dbc:postgresql://postgres.default.svc.cluster.local:5432/mordent?serverTimezone=UTC
+  data:
+    mongodb:
+      host: mongo.default.svc.cluster.local
+      port: 27017
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+  kafka:
+    bootstrap-servers: http://kafka.default.svc.cluster.local:9092
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin.default.svc.cluster.local:9411/api/v2/spans
+
+services:
+  auth:
+    url: http://mordent-auth-service.default.svc.cluster.local:8080

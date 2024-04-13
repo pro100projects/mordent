@@ -1,0 +1,13 @@
+spring:
+  r2dbc:
+    username: ${MONGO_USERNAME}
+    password: ${MONGO_PASSWORD}
+    url: r2dbc:mongodb://mongo.default.svc.cluster.local:27017/mordent
+  data:
+    mongodb:
+      host: mongo.default.svc.cluster.local
+      port: 27017
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+  kafka:
+    bootstrap-servers: http://kafka.default.svc.cluster.local:9092

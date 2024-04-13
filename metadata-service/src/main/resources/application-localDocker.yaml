@@ -1,0 +1,13 @@
+spring:
+  r2dbc:
+    username: root
+    password: root
+    url: r2dbc:mongodb://mongo:27017/mordent
+  data:
+    mongodb:
+      host: mongo
+      port: 27017
+      username: root
+      password: root
+  kafka:
+    bootstrap-servers: broker:9092

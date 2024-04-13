@@ -1,0 +1,1 @@
+UPDATE users SET enabled=true, uuid=null WHERE id=1;

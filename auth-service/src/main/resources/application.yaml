@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: auth-service
+  flyway:
+    enabled: true
+    driver-class-name: org.postgresql.Driver
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      topics:
+        registration: mordent-registration-event
+        activate: mordent-activate-event
+        forgot-password: mordent-forgot-password-event
+        reset-password: mordent-reset-password-event
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 111073851062-e2gg434h3c30tu02kirk5u4ob5s86juk.apps.googleusercontent.com
+            client-secret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+
+logging.pattern.level: "%5p [${spring.application.name:} %X{traceId:-} %X{spanId:-}]"
+
+security:
+  jwt:
+    secret: 3F4428472B4B6150645367566B5970337336763979244226452948404D6351655468576D5A7134743777217A25432A462D4A614E645267556A586E3272357538
+  oauth2:
+    authorized-request-host: http://localhost:8080
+    authorized-request-hosts:
+      - http://mordent.local.com
+      - https://mordent.local.com
+    authorized-redirect-uris:
+      - http://mordent.local.com/oauth2-redirect
+      - https://mordent.local.com/oauth2-redirect
+  activate:
+    redirect-uri: https://mordent.local.com/activate-redirect

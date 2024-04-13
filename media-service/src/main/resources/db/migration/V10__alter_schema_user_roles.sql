@@ -1,0 +1,1 @@
+ALTER TABLE user_roles ALTER COLUMN role TYPE VARCHAR(20) USING role::varchar(20) NOTNULL ;

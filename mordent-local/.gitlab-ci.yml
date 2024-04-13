@@ -1,0 +1,22 @@
+stages:
+  - danger-review
+  - cleanup
+
+danger-review:
+  image: node:latest
+  stage: danger-review
+  only:
+    - merge_requests
+  script:
+    - npm install danger
+    - npx danger ci --dangerfile Dangerfile.js --failOnErrors
+
+cleanup:
+  image: docker:stable
+  stage: cleanup
+  only:
+    - tags
+  before_script:
+    - apk add --no-cache bash curl jq
+    - chmod +x ./gitlab-job-artifact-cleanup.sh
+  script: ./gitlab-job-artifact-cleanup.sh

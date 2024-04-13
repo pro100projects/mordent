@@ -1,0 +1,13 @@
+spring:
+  r2dbc:
+    username: root
+    password: root
+    url: r2dbc:mongodb://localhost:27017/mordent
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: root
+      password: root
+  kafka:
+    bootstrap-servers: localhost:9092
