@@ -29,7 +29,7 @@ const AuthPage = ({ children }) => {
                 component="a"
                 href={ROUTES.welcome}
                 className={'mr-2 text-black text-5xl font-semibold no-underline'}>
-                Mordent
+                SoundWave
               </Typography>
             </div>
           </div>

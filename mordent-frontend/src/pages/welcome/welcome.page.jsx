@@ -4,7 +4,7 @@ const WelcomePage = () => {
   return (
     <div className={'flex mt-[64px] justify-center items-center'}>
       <div>
-        <h1>Mordent Welcome Page</h1>
+        <h1>SoundWave Welcome Page</h1>
       </div>
     </div>
   );

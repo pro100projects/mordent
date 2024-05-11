@@ -4,7 +4,7 @@ import logo from './../../images/mordent.svg';
 const LogoIcon = ({ style, width = 32, height = 32 }) => {
   return (
     <div style={style}>
-      <img src={logo} alt={'Mordent'} width={width} height={height} />
+      <img src={logo} alt={'SoundWave'} width={width} height={height} />
     </div>
   );
 };

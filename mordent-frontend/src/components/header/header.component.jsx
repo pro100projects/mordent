@@ -51,7 +51,7 @@ const Header = ({ roles }) => {
               variant="h5"
               noWrap
               className={'mr-2 text-black font-semibold no-underline'}>
-              Mordent
+              SoundWave
             </Typography>
           </NavLink>
 
